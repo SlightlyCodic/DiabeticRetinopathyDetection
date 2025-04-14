@@ -20,7 +20,7 @@ log_dir = args.training_logs_path
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 
-log_filename = f"train_{args.model_name}_{args.model_save_name}.log"
+log_filename = f"train_{args.model_name}.log"
 log_path = os.path.join(log_dir, log_filename)
 
 

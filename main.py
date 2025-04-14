@@ -34,9 +34,6 @@ logging.basicConfig(
     ]
 )
 
-logging.info(f"🔧 Starting training for model: {args.model_name}")
-logging.info(f"Saving log to: {log_path}")
-
 
 # Data augmentation and preprocessing
 transform = transforms.Compose([

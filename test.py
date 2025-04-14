@@ -30,8 +30,6 @@ logging.basicConfig(
     ]
 )
 
-logging.info(f"🔍 Starting evaluation for model: {args.model_name}")
-logging.info(f"📂 Logs will be saved to: {log_path}")
 
 
 # Load model
@@ -83,6 +81,6 @@ with torch.no_grad():
 
         all_preds.extend(predicted.cpu().numpy())
         all_labels.extend(labels.cpu().numpy())
-logging.info(f"\n🔍 Test Loss: {test_loss/len(test_loader):.4f}")
-logging.info(f"✅ Test Accuracy: {100 * correct / total:.2f}%")
+logging.info(f"\n Test Loss: {test_loss/len(test_loader):.4f}")
+logging.info(f"Test Accuracy: {100 * correct / total:.2f}%")
 

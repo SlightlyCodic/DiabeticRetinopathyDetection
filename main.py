@@ -110,9 +110,6 @@ for epoch in range(epochs):
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
 
-    # Print statistics for this epoch
-    print(f"Epoch [{epoch+1}/{epochs}], Loss: {running_loss/len(train_loader):.4f}, Accuracy: {100 * correct / total:.2f}%")
-
     # Validation loop
     model.eval()  # Set model to evaluation mode
     val_loss = 0.0
@@ -127,9 +124,9 @@ for epoch in range(epochs):
             _, predicted = torch.max(outputs, 1)
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
-    logging.info(f"\n📅 Epoch {epoch+1}/{epochs}")
-    logging.info(f"📈 Train Loss: {running_loss/len(train_loader):.4f} | Train Accuracy: {100 * correct / total:.2f}%")
-    logging.info(f"🧪 Validation Loss: {val_loss/len(val_loader):.4f} | Validation Accuracy: {100 * correct / total:.2f}%")
+    logging.info(f"\n Epoch {epoch+1}/{epochs}")
+    logging.info(f"Train Loss: {running_loss/len(train_loader):.4f} | Train Accuracy: {100 * correct / total:.2f}%")
+    logging.info(f"Validation Loss: {val_loss/len(val_loader):.4f} | Validation Accuracy: {100 * correct / total:.2f}%")
 
 
 # Save the trained model

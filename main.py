@@ -110,5 +110,8 @@ for epoch in range(epochs):
     print(f"Validation Loss: {val_loss/len(val_loader):.4f}, Accuracy: {100 * correct / total:.2f}%")
 
 # Save the trained model
+model_dir = os.path.dirname(args.model_path)
+if model_dir and not os.path.exists(model_dir):
+    os.makedirs(model_dir)
 torch.save(model.state_dict(), args.model_path)
 print("Model saved successfully!")

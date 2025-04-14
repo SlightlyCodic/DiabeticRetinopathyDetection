@@ -8,7 +8,7 @@ python main.py \
   --batch_size 64 \
   --lr 0.00001 \
   --num_workers 4 \
-  --model_path "EfficientNetB0.pth" \
+  --model_path "Models/EfficientNetB0.pth" \
   --model_name "efficientnet_b0" \
   --optimizer "Adam" \
   --loss "CrossEntropyLoss" \

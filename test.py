@@ -83,9 +83,6 @@ with torch.no_grad():
 
         all_preds.extend(predicted.cpu().numpy())
         all_labels.extend(labels.cpu().numpy())
-
-print(f"\n🔍 Test Loss: {test_loss/len(test_loader):.4f}")
-print(f"✅ Test Accuracy: {100 * correct / total:.2f}%")
 logging.info(f"\n🔍 Test Loss: {test_loss/len(test_loader):.4f}")
 logging.info(f"✅ Test Accuracy: {100 * correct / total:.2f}%")
 

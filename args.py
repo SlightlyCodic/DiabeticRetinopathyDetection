@@ -12,6 +12,7 @@ def get_train_args():
     parser.add_argument('--model_path', type=str, default='models/EfficientNetB0.pth', help='Path to save model')
     parser.add_argument('--optimizer', type=str, default='Adam', help='Optimizer class name from torch.optim')
     parser.add_argument('--loss', type=str, default='CrossEntropyLoss', help='Loss class name from torch.nn')
+    parser.add_argument('--training_logs_path', type=str, default='training_logs/', help='Path to Save Training Logs')
 
     return parser.parse_args()
 
@@ -24,5 +25,6 @@ def get_test_args():
     parser.add_argument('--batch_size', type=int, default=64, help='Batch size')
     parser.add_argument('--num_workers', type=int, default=4, help='Number of data loading workers')
     parser.add_argument('--loss', type=str, default='CrossEntropyLoss', help='Loss function from torch.nn')
+    parser.add_argument('--test_logs_path', type=str, default='test_logs/', help='Path to Save Test Logs')
 
     return parser.parse_args()

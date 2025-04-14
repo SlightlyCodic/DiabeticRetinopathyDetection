@@ -16,10 +16,11 @@ args = get_train_args()
 
 # Create logs directory
 # Build log file name with model name (no timestamp)
-log_dir = "training_logs"
-os.makedirs(log_dir, exist_ok=True)
+log_dir = args.training_logs_path
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
 
-log_filename = f"train_{args.model_name}.log"
+log_filename = f"train_{args.model_name}_{args.model_save_name}.log"
 log_path = os.path.join(log_dir, log_filename)
 
 
@@ -126,8 +127,6 @@ for epoch in range(epochs):
             _, predicted = torch.max(outputs, 1)
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
-
-    print(f"Validation Loss: {val_loss/len(val_loader):.4f}, Accuracy: {100 * correct / total:.2f}%")
     logging.info(f"\n📅 Epoch {epoch+1}/{epochs}")
     logging.info(f"📈 Train Loss: {running_loss/len(train_loader):.4f} | Train Accuracy: {100 * correct / total:.2f}%")
     logging.info(f"🧪 Validation Loss: {val_loss/len(val_loader):.4f} | Validation Accuracy: {100 * correct / total:.2f}%")

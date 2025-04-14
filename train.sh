@@ -10,5 +10,5 @@ python main.py \
   --num_workers 4 \
   --model_path "EfficientNetB0.pth" \
   --model_name "efficientnet_b0" \
-  --optimizer "adam" \
-  --loss "cross_entropy" \
+  --optimizer "Adam" \
+  --loss "CrossEntropyLoss" \

@@ -7,8 +7,31 @@ from torchvision import transforms
 from torch.utils.data import DataLoader
 from PIL import Image
 from dataset import DiabeticRetinopathyDataset  # assuming you refactored the dataset class to a separate file
+import logging
+import os
 from args import get_test_args
 args = get_test_args()
+
+# Create log directory
+log_dir = "test_logs"
+os.makedirs(log_dir, exist_ok=True)
+
+# Log file based on model name (no timestamp)
+log_filename = f"test_{args.model_name}.log"
+log_path = os.path.join(log_dir, log_filename)
+
+# Configure logging: to both console and file
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler(log_path, mode='w'),
+        logging.StreamHandler()
+    ]
+)
+
+logging.info(f"🔍 Starting evaluation for model: {args.model_name}")
+logging.info(f"📂 Logs will be saved to: {log_path}")
 
 
 # Load model
@@ -63,3 +86,6 @@ with torch.no_grad():
 
 print(f"\n🔍 Test Loss: {test_loss/len(test_loader):.4f}")
 print(f"✅ Test Accuracy: {100 * correct / total:.2f}%")
+logging.info(f"\n🔍 Test Loss: {test_loss/len(test_loader):.4f}")
+logging.info(f"✅ Test Accuracy: {100 * correct / total:.2f}%")
+

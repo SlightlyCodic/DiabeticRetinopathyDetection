@@ -10,11 +10,31 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from dataset import DiabeticRetinopathyDataset
 from args import get_train_args
+import logging
+from datetime import datetime
 args = get_train_args()
 
+# Create logs directory
+# Build log file name with model name (no timestamp)
+log_dir = "training_logs"
+os.makedirs(log_dir, exist_ok=True)
+
+log_filename = f"train_{args.model_name}.log"
+log_path = os.path.join(log_dir, log_filename)
 
 
-# Dataset Class for Diabetic Retinopathy Detection
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler(log_path, mode='w'),  # Save to file
+        logging.StreamHandler()  # Print to console
+    ]
+)
+
+logging.info(f"🔧 Starting training for model: {args.model_name}")
+logging.info(f"Saving log to: {log_path}")
 
 
 # Data augmentation and preprocessing
@@ -108,6 +128,10 @@ for epoch in range(epochs):
             correct += (predicted == labels).sum().item()
 
     print(f"Validation Loss: {val_loss/len(val_loader):.4f}, Accuracy: {100 * correct / total:.2f}%")
+    logging.info(f"\n📅 Epoch {epoch+1}/{epochs}")
+    logging.info(f"📈 Train Loss: {running_loss/len(train_loader):.4f} | Train Accuracy: {100 * correct / total:.2f}%")
+    logging.info(f"🧪 Validation Loss: {val_loss/len(val_loader):.4f} | Validation Accuracy: {100 * correct / total:.2f}%")
+
 
 # Save the trained model
 model_dir = os.path.dirname(args.model_path)
